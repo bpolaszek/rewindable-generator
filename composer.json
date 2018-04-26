@@ -1,0 +1,36 @@
+{
+    "name": "bentools/rewindable-generator",
+    "description": "Now your generators become rewindable.",
+    "keywords": ["generator", "iterator", "generators", "rewindable"],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "satooshi/php-coveralls": "@stable",
+        "squizlabs/php_codesniffer": "@stable"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "classmap": [
+            "src/RewindableGenerator.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BenTools\\RewindableGenerator\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
