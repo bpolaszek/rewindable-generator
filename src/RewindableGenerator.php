@@ -14,11 +14,6 @@ final class RewindableGenerator implements \Iterator
     private $iterator;
 
     /**
-     * @var int
-     */
-    private $rewindCount = 0;
-
-    /**
      * RewindableGenerator constructor.
      * @param Generator $generator
      */
@@ -56,7 +51,11 @@ final class RewindableGenerator implements \Iterator
      */
     public function valid()
     {
-        return $this->iterator->valid();
+        $valid = $this->iterator->valid();
+        if (false === $valid && $this->iterator instanceof CachingIterator) {
+            $this->iterator = new ArrayIterator($this->iterator->getCache());
+        }
+        return $valid;
     }
 
     /**
@@ -64,13 +63,6 @@ final class RewindableGenerator implements \Iterator
      */
     public function rewind()
     {
-        $this->rewindCount++;
-
-        // Second time the iterator is called => replace inner iterator by cache
-        if (2 === $this->rewindCount) {
-            $this->iterator = new ArrayIterator($this->iterator->getCache());
-        }
-
         $this->iterator->rewind();
     }
 }

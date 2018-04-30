@@ -38,6 +38,8 @@ var_dump(iterator_to_array($iterator)); // ['foo', 'bar']
 var_dump(iterator_to_array($iterator)); // ['foo', 'bar']
 ```
 
+**Warning:** An exception will be thrown if you intend to rewind a generator which has not reached the end (i.e you `break`the loop), since the `CachingIterator` won't have all items in cache.
+
 Installation
 ------------
 
