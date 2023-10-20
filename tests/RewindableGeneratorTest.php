@@ -1,43 +1,29 @@
 <?php
 
-namespace BenTools\RewindableGenerator\Tests;
-
 use BenTools\RewindableGenerator;
-use PHPUnit\Framework\TestCase;
 
-class RewindableGeneratorTest extends TestCase
-{
+it('is rewindable', function () {
+    $generator = function () {
+        yield 'foo';
+        yield 'bar';
+    };
 
-    public function testGeneratorIsRewindable()
-    {
-        $generator = function () {
-            yield 'foo';
-            yield 'bar';
-        };
+    $rewindable = new RewindableGenerator($generator());
+    $expected = ['foo', 'bar'];
+    expect(iterator_to_array($rewindable))->toEqual($expected)
+        ->and(iterator_to_array($rewindable))->toEqual($expected)
+        ->and(iterator_to_array($rewindable))->toEqual($expected);
+});
 
-        $rewindable = new RewindableGenerator($generator());
-        $expected = ['foo', 'bar'];
-        $this->assertEquals($expected, iterator_to_array($rewindable));
-        $this->assertEquals($expected, iterator_to_array($rewindable));
-        $this->assertEquals($expected, iterator_to_array($rewindable));
+it('cannot be rewindable if it has not been fully traversed at least once', function () {
+    $generator = function () {
+        yield 'foo';
+        yield 'bar';
+    };
+
+    $rewindable = new RewindableGenerator($generator());
+    foreach ($rewindable as $value) {
+        break;
     }
-
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Cannot rewind a generator that was already run
-     */
-    public function testGeneratorCannotBeRewindable()
-    {
-        $generator = function () {
-            yield 'foo';
-            yield 'bar';
-        };
-
-        $rewindable = new RewindableGenerator($generator());
-        $expected = ['foo', 'bar'];
-        foreach ($rewindable as $value) {
-            break;
-        }
-        iterator_to_array($rewindable);
-    }
-}
+    iterator_to_array($rewindable);
+})->throws(Exception::class, 'Cannot rewind a generator that was already run');

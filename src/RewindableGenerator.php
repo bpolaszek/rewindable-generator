@@ -5,63 +5,51 @@ namespace BenTools;
 use ArrayIterator;
 use CachingIterator;
 use Generator;
+use Iterator;
 
-final class RewindableGenerator implements \Iterator
+/**
+ * @template T
+ *
+ * @implements Iterator<T>
+ */
+final class RewindableGenerator implements Iterator
 {
     /**
-     * @var CachingIterator|ArrayIterator
+     * @var Iterator<T>
      */
-    private $iterator;
+    private Iterator $iterator;
 
-    /**
-     * RewindableGenerator constructor.
-     * @param Generator $generator
-     */
     public function __construct(Generator $generator)
     {
         $this->iterator = new CachingIterator($generator, CachingIterator::FULL_CACHE);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function current()
+    public function current(): mixed
     {
         return $this->iterator->current();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function next()
+    public function next(): void
     {
         $this->iterator->next();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function key()
+    public function key(): mixed
     {
         return $this->iterator->key();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function valid()
+    public function valid(): bool
     {
         $valid = $this->iterator->valid();
         if (false === $valid && $this->iterator instanceof CachingIterator) {
             $this->iterator = new ArrayIterator($this->iterator->getCache());
         }
+
         return $valid;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterator->rewind();
     }

@@ -1,8 +1,7 @@
 [![Latest Stable Version](https://poser.pugx.org/bentools/rewindable-generator/v/stable)](https://packagist.org/packages/bentools/rewindable-generator)
 [![License](https://poser.pugx.org/bentools/rewindable-generator/license)](https://packagist.org/packages/bentools/rewindable-generator)
-[![Build Status](https://img.shields.io/travis/bpolaszek/rewindable-generator/master.svg?style=flat-square)](https://travis-ci.org/bpolaszek/rewindable-generator)
-[![Coverage Status](https://coveralls.io/repos/github/bpolaszek/rewindable-generator/badge.svg?branch=master)](https://coveralls.io/github/bpolaszek/rewindable-generator?branch=master)
-[![Quality Score](https://img.shields.io/scrutinizer/g/bpolaszek/rewindable-generator.svg?style=flat-square)](https://scrutinizer-ci.com/g/bpolaszek/rewindable-generator)
+[![CI Workflow](https://github.com/bpolaszek/rewindable-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/bpolaszek/rewindable-generator/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/bpolaszek/rewindable-generator/branch/main/graph/badge.svg?token=L5ulTaymbt)](https://codecov.io/gh/bpolaszek/rewindable-generator)
 [![Total Downloads](https://poser.pugx.org/bentools/rewindable-generator/downloads)](https://packagist.org/packages/bentools/rewindable-generator)
 
 Rewindable generator
