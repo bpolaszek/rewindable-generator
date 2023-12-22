@@ -19,6 +19,7 @@ final class RewindableGenerator implements Iterator
      */
     private Iterator $iterator;
 
+    /** @param Generator<T> $generator */
     public function __construct(Generator $generator)
     {
         $this->iterator = new CachingIterator($generator, CachingIterator::FULL_CACHE);
