@@ -27,7 +27,8 @@
     "autoload": {
         "classmap": [
             "src/RewindableGenerator.php"
-        ]
+        ],
+        "files": ["src/functions.php"]
     },
     "autoload-dev": {
         "psr-4": {
